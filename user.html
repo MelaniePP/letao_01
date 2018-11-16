@@ -22,7 +22,7 @@
      </div>
      <div class="nav">
        <ul>
-         <li><a href="user.html" class="users"><i class="glyphicon glyphicon-user"></i><span>用户管理</span></a></li>
+         <li><a href="user.html" class="current"><i class="glyphicon glyphicon-user"></i><span>用户管理</span></a></li>
          <li>
            <a href="javastript:;" class="category"><i class="glyphicon glyphicon-list"></i><span>分类管理</span></a>
            <div class="child">
@@ -46,15 +46,25 @@
     </div>
    
       <div class="container-fluid">
-          <ol class="breadcrumb mt_20">
-            <li><a href="#">管理系统</a></li>
-            <li class="active">首页</li>
-          </ol>
-
-          <div class="lt_content">
-            <div class="echart_left pull-left"></div>
-            <div class="echart_right pull-right"></div>
-          </div>
+        <ol class="breadcrumb mt_20">
+            <li><a href="index.html">管理系统</a></li>
+            <li class="active">用户管理</li>
+        </ol>
+        <!-- 序号	用户名	手机号	状态	操作 -->
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>用户名</th>
+              <th>手机号</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 通过模板引擎动态更新数据 -->
+          </tbody>
+        </table>
       </div>
       
     
@@ -83,15 +93,33 @@
 
 
 
+<!-- 准备模板 -->
+<script type="text/template" id="tmp">
+  {{ each rows v i }}
+  <tr>
+      <td>{{ v.id }}</td>
+      <td>{{ v.username }}</td>
+      <td>{{ v.mobile }}</td>
+      <td>{{ v.isDelete == 1?"正常":"已禁用" }}</td>
+      {{ if v.isDelete == 1}}
+      <td><button class = "btn btn-danger">禁用</button></td>
+      {{ else }}
+      <td><button class = "btn btn-success">启用</button></td>
+      {{ /if }}
+    </tr>
+{{ /each}}
 
+</script>
 <script src="./lib/jquery/jquery.min.js"></script>
 <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="./lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
 <script src="./lib/nprogress/nprogress.js"></script>
+<script src="./js/user.js"></script>
 <script src="./js/Islogin.js"></script>
-<script src="./lib/echarts/echarts.min.js"></script>
 <script src="./js/common.js"></script>
-<script src="./js/index.js"></script>
+<!-- 引入模板插件 -->
+<script src="./lib/artTemplate/template-web.js"></script>
+
 
 
 </body>
